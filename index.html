@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Make 10</title>
+  </head>
+  <body class="body">
+      <div class="numbers">
+        <input class="input" id="box1" type="text" maxlength="1" onkeyup="moveOnMax(this, 'box2')"/>
+        <input class="input" id="box2" type="text" maxlength="1" onkeyup="moveOnMax(this,'box3')"/>
+        <input class="input" id="box3" type="text" maxlength="1" onkeyup="moveOnMax(this,'box4')"/>
+        <input class="input" id="box4" type="text" maxlength="1"/>
+      </div>
+
+      <script src="make10.js"></script>
+  </body>
+</html>
