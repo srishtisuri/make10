@@ -84,16 +84,26 @@ function removeArraysWithDuplicates() {
 }
 
 function createEquations() {
-  let equation =
-    "" +
-    finalArrangements[0][0] +
-    operationsArrangements[0][0] +
-    finalArrangements[0][1] +
-    operationsArrangements[0][1] +
-    finalArrangements[0][2] +
-    operationsArrangements[0][2] +
-    finalArrangements[0][3];
-  console.log(equation);
+  let l = 0;
+  let j = 0;
+  let count = 0;
+  let equation = "";
+  for (let i = 0; i < finalArrangements.length; i++) {
+    for (let k = 0; k < operationsArrangements.length; k++) {
+      equation =
+        finalArrangements[i][j] +
+        operationsArrangements[k][l] +
+        finalArrangements[i][j + 1] +
+        operationsArrangements[k][l + 1] +
+        finalArrangements[i][j + 2] +
+        operationsArrangements[0][l + 2] +
+        finalArrangements[i][j + 3];
+      l = 0;
+      j = 0;
+      count++;
+      console.log("Equation: " + equation + " Count: " + count);
+    }
+  }
 }
 
 function compute() {
