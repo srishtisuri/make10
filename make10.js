@@ -4,7 +4,7 @@ let num2 = getNumber("box2");
 let num3 = getNumber("box3");
 let num4 = getNumber("box4");
 
-let numbers = ["4", "4", "4", "3"];
+let numbers = ["2", "1", "3", "4"];
 
 let numArrangements = [];
 let tempArray = [];
@@ -38,8 +38,6 @@ function arrangeOperations() {
       }
     }
   }
-  console.log(operationsArrangements);
-  //return operationsArrangements;
 }
 
 //All possible combinations of the 4 numbers
@@ -75,8 +73,6 @@ function checkIncludes(index) {
 
 //Remove the combinations with any repetitions
 function removeArraysWithDuplicates() {
-  arrangeNumbers();
-
   tempArray.filter((arr, index) => {
     if (
       arr.sort().toString() == numbers.sort().toString() &&
@@ -85,5 +81,24 @@ function removeArraysWithDuplicates() {
       finalArrangements.push(numArrangements[index]);
     }
   });
-  console.log(finalArrangements);
+}
+
+function createEquations() {
+  let equation =
+    "" +
+    finalArrangements[0][0] +
+    operationsArrangements[0][0] +
+    finalArrangements[0][1] +
+    operationsArrangements[0][1] +
+    finalArrangements[0][2] +
+    operationsArrangements[0][2] +
+    finalArrangements[0][3];
+  console.log(equation);
+}
+
+function compute() {
+  arrangeNumbers();
+  removeArraysWithDuplicates();
+  arrangeOperations();
+  createEquations();
 }
