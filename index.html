@@ -3,8 +3,15 @@
   <head>
     <link rel="stylesheet" href="styles.css" />
     <title>Make 10</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Averia Sans Libre"
+      rel="stylesheet"
+    />
   </head>
   <body class="body">
+    <div>
+      <img src="heading.png" />
+    </div>
     <div class="numbers">
       <input
         class="input"
@@ -28,6 +35,18 @@
         onkeyup="moveOnMax(this,'box4')"
       />
       <input class="input" id="box4" type="text" maxlength="1" />
+    </div>
+    <div class="buttonDiv">
+      <button class="calculateBtn" onclick="compute()">Calculate</button>
+    </div>
+
+    <div>
+      <table id="successTable">
+        <tr>
+          <td>Equation</td>
+          <td>Answer</td>
+        </tr>
+      </table>
     </div>
 
     <script src="make10.js"></script>

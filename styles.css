@@ -1,14 +1,29 @@
 .body {
-    font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-image: url("orange-paint.jpg");
 }
 
 .numbers {
-    text-align: center;
+  text-align: center;
+  padding: 20px;
 }
 
 .input {
-    height: 50px;
-    width: 50px;
-    font-size: 40px;
-    text-align: center;
+  height: 50px;
+  width: 50px;
+  font-size: 40px;
+  text-align: center;
+  border: 0px;
+}
+
+.calculateBtn {
+  font-family: "Averia Sans Libre";
+  height: 60px;
+  width: 140px;
+  border-radius: 8px;
+  border: 0px;
+  background-color: black;
+  font-size: 22px;
+  color: white;
 }

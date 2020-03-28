@@ -1,10 +1,5 @@
 //Global variables
-let num1 = getNumber("box1");
-let num2 = getNumber("box2");
-let num3 = getNumber("box3");
-let num4 = getNumber("box4");
-
-let numbers = "1230".split("");
+let numbers = [];
 
 let numArrangements = [];
 let tempArray = [];
@@ -86,9 +81,7 @@ function removeArraysWithDuplicates() {
 
 //Create all possible equations to be computed
 function createEquations() {
-  let count = 0;
   let equation = "";
-  let countSuccess = 0;
   for (let i = 0; i < finalNumArrangements.length; i++) {
     for (let k = 0; k < operationsArrangements.length; k++) {
       equation =
@@ -99,7 +92,6 @@ function createEquations() {
         finalNumArrangements[i][2] +
         operationsArrangements[k][2] +
         finalNumArrangements[i][3];
-      count++;
 
       //Original equations
       equations.push(equation);
@@ -150,7 +142,17 @@ function evaluateSolutions() {
   });
 }
 
+function createTable() {
+  let table = document.getElementById("successTable");
+}
+
 function compute() {
+  numbers.push(
+    getNumber("box1"),
+    getNumber("box2"),
+    getNumber("box3"),
+    getNumber("box4")
+  );
   arrangeNumbers();
   removeArraysWithDuplicates();
   arrangeOperations();
