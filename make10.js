@@ -127,23 +127,54 @@ function addBrackets(equation, index1, index2, index3, index4) {
 }
 
 function evaluateSolutions() {
+  let rightCount = 0;
+  let wrongCount = 0;
+
   equations.forEach(eq => {
-    if (eval(eq) == 10) {
-      console.log(eq + " = 10!");
-    } else if (
-      eq.includes("/0") ||
-      eval(eq) == Infinity ||
-      eval(eq) == -Infinity
-    ) {
-      console.log(eq + " = undefined");
+    let ans = eval(eq);
+    if (ans == 10) {
+      rightCount++;
+      fillTable("rightTable", eq, ans);
+    } else if (eq.includes("/0") || ans == Infinity || ans == -Infinity) {
+      wrongCount++;
+      fillTable("wrongTable", eq, ans);
     } else {
-      console.log(eq + " = " + eval(eq) + " :(");
+      wrongCount++;
+      fillTable("wrongTable", eq, ans);
     }
   });
+
+  createTable("title1", `Successful Methods: ${rightCount}`, "hr1");
+  createTable("title2", `Unsuccessful Methods: ${wrongCount}`, "hr2");
 }
 
-function createTable() {
-  let table = document.getElementById("successTable");
+function createTable(titleId, heading, rowId) {
+  let h = document.getElementById(titleId);
+  h.innerHTML = heading;
+  let tr = document.getElementById(rowId);
+  let th1 = document.createElement("th");
+  let th2 = document.createElement("th");
+  th1.innerHTML = "Generated Equations";
+  th2.innerHTML = "Answer";
+  tr.appendChild(th1);
+  tr.appendChild(th2);
+}
+
+function fillTable(id, eq, ans) {
+  let table = document.getElementById(id);
+  let i = 1;
+
+  let row = table.insertRow(i);
+  let cell1 = row.insertCell(0);
+  let cell2 = row.insertCell(1);
+  cell1.innerHTML = "" + eq;
+  cell2.innerHTML = ans.toFixed(2);
+  i++;
+}
+
+function clear() {
+  location.reload();
+  //return false;
 }
 
 function compute() {
@@ -159,11 +190,3 @@ function compute() {
   createEquations();
   evaluateSolutions();
 }
-
-// console.log(
-//   // "Equation: " +
-//   equation //.replace(/,/g, "")
-//   //" Answer: " + eval(equation)
-//   // " Count: " +
-//   // count
-// );

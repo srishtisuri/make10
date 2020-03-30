@@ -37,15 +37,23 @@
       <input class="input" id="box4" type="text" maxlength="1" />
     </div>
     <div class="buttonDiv">
-      <button class="calculateBtn" onclick="compute()">Calculate</button>
+      <button class="button" onclick="compute()">Calculate</button>
+      <button class="button" onclick="clear()">Clear</button>
     </div>
 
     <div>
-      <table id="successTable">
-        <tr>
-          <td>Equation</td>
-          <td>Answer</td>
-        </tr>
+      <h1 id="title1"></h1>
+
+      <table id="rightTable">
+        <tr id="hr1"></tr>
+      </table>
+    </div>
+
+    <div>
+      <h1 id="title2"></h1>
+
+      <table id="wrongTable">
+        <tr id="hr2"></tr>
       </table>
     </div>
 

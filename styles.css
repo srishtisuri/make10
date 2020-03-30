@@ -17,7 +17,7 @@
   border: 0px;
 }
 
-.calculateBtn {
+.button {
   font-family: "Averia Sans Libre";
   height: 60px;
   width: 140px;
@@ -26,4 +26,28 @@
   background-color: black;
   font-size: 22px;
   color: white;
+  margin-bottom: 40px;
+}
+
+table,
+th,
+td {
+  font-family: "Averia Sans Libre";
+  border: 3px solid black;
+  border-collapse: collapse;
+  padding: 10px;
+  width: 70%;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+th {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+td {
+  font-size: 30px;
 }
