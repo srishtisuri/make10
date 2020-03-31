@@ -196,8 +196,8 @@ function compute() {
 }
 
 function deleteTables() {
-  let table1 = document.querySelector("rightTable");
-  let table2 = document.querySelector("wrongTable");
+  let table1 = document.getElementById("rightTable");
+  let table2 = document.getElementById("wrongTable");
 
   while (table1.rows.length != 0) {
     table1.deleteRow(0);
