@@ -7,6 +7,9 @@ let finalNumArrangements = [];
 let operationsArrangements = [];
 let equations = [];
 
+let rightCount = 0;
+let wrongCount = 0;
+
 //Move cursor for input boxes
 function moveOnMax(field, nextFieldID) {
   if (field.value.length >= field.maxLength) {
@@ -15,45 +18,36 @@ function moveOnMax(field, nextFieldID) {
 }
 
 //Retrieve numbers from input
-function getNumber(id) {
-  return document.getElementById(id).value;
+function getNumbers() {
+  for (let i = 1; i < 5; i++) {
+    numbers.push(document.getElementById(`box${i}`).value);
+  }
 }
 
 //All possible combinations of any 3 of the 4 maths operations
 function arrangeOperations() {
   let operations = ["+", "-", "/", "*"];
-
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      for (let k = 0; k < 4; k++) {
-        operationsArrangements.push([
-          operations[i],
-          operations[j],
-          operations[k]
-        ]);
-      }
-    }
-  }
+  operations.forEach(o1 => {
+    operations.forEach(o2 => {
+      operations.forEach(o3 => {
+        operationsArrangements.push([o1, o2, o3]);
+      });
+    });
+  });
 }
 
 //All possible combinations of the 4 numbers
 function arrangeNumbers() {
-  for (let i = 0; i < 4; i++) {
-    for (let j = 0; j < 4; j++) {
-      for (let k = 0; k < 4; k++) {
-        for (let l = 0; l < 4; l++) {
-          numArrangements.push([
-            numbers[i],
-            numbers[j],
-            numbers[k],
-            numbers[l]
-          ]);
-
-          tempArray.push([numbers[i], numbers[j], numbers[k], numbers[l]]);
-        }
-      }
-    }
-  }
+  numbers.forEach(n1 => {
+    numbers.forEach(n2 => {
+      numbers.forEach(n3 => {
+        numbers.forEach(n4 => {
+          numArrangements.push([n1, n2, n3, n4]);
+          tempArray.push([n1, n2, n3, n4]);
+        });
+      });
+    });
+  });
 }
 
 //Check duplicate combinations in final array e.g. numbers = [1,3,1,4] ~~> array1 = [1,1,3,4], array2 = [1,1,3,4]
@@ -67,7 +61,7 @@ function checkIncludes(index) {
   return includes;
 }
 
-//Remove the combinations with any repetitions e.g. numbers = [1,2,3,34] ~~> array = [1,1,1,1]
+//Remove the combinations with any repetitions e.g. numbers = [1,2,3,4] ~~> array = [1,1,1,1]
 function removeArraysWithDuplicates() {
   tempArray.filter((arr, index) => {
     if (
@@ -127,31 +121,29 @@ function addBrackets(equation, index1, index2, index3, index4) {
 }
 
 function evaluateSolutions() {
-  let rightCount = 0;
-  let wrongCount = 0;
+  createTable("title1", `Successful Methods`, "rightTable");
+  createTable("title2", `Unsuccessful Methods`, "wrongTable");
 
   equations.forEach(eq => {
     let ans = eval(eq);
     if (ans == 10) {
       rightCount++;
       fillTable("rightTable", eq, ans);
-    } else if (eq.includes("/0") || ans == Infinity || ans == -Infinity) {
-      wrongCount++;
-      fillTable("wrongTable", eq, ans);
     } else {
       wrongCount++;
       fillTable("wrongTable", eq, ans);
     }
   });
-
-  createTable("title1", `Successful Methods: ${rightCount}`, "hr1");
-  createTable("title2", `Unsuccessful Methods: ${wrongCount}`, "hr2");
 }
 
-function createTable(titleId, heading, rowId) {
+function createTable(titleId, heading, tableName) {
   let h = document.getElementById(titleId);
   h.innerHTML = heading;
-  let tr = document.getElementById(rowId);
+
+  let table = document.getElementById(tableName);
+  let tr = document.createElement("tr");
+  table.appendChild(tr);
+
   let th1 = document.createElement("th");
   let th2 = document.createElement("th");
   th1.innerHTML = "Generated Equations";
@@ -162,31 +154,56 @@ function createTable(titleId, heading, rowId) {
 
 function fillTable(id, eq, ans) {
   let table = document.getElementById(id);
-  let i = 1;
-
-  let row = table.insertRow(i);
+  let row = table.insertRow(table.rows.length);
   let cell1 = row.insertCell(0);
   let cell2 = row.insertCell(1);
   cell1.innerHTML = "" + eq;
   cell2.innerHTML = ans.toFixed(2);
-  i++;
-}
-
-function clear() {
-  location.reload();
-  //return false;
 }
 
 function compute() {
-  numbers.push(
-    getNumber("box1"),
-    getNumber("box2"),
-    getNumber("box3"),
-    getNumber("box4")
-  );
+  console.log(numbers.length);
+
+  if (numbers.length == 0) {
+    getNumbers();
+  } else {
+    //let table1 = document.getElementById("rightTable");
+    // let table2 = document.getElementById("wrongTable");
+    deleteTables();
+    // while (table1.rows.length > 0) {
+    //   console.log("kms");
+    // table1.deleteRow(0);
+    //   console.log("row deleted!");
+    // }
+    // while (table2.rows.length > 0) {
+    //   console.log(table2.rows.length);
+    //   table2.deleteRow(0);
+    //   console.log("row deleted!");
+    // }
+
+    //document.getElementById("rightTable").innerHTML = "";
+    //document.getElementById("wrongTable").innerHTML = "";
+
+    numbers.splice(0, 4);
+    getNumbers();
+  }
+
   arrangeNumbers();
   removeArraysWithDuplicates();
   arrangeOperations();
   createEquations();
   evaluateSolutions();
+}
+
+function deleteTables() {
+  let table1 = document.querySelector("rightTable");
+  let table2 = document.querySelector("wrongTable");
+
+  while (table1.rows.length != 0) {
+    table1.deleteRow(0);
+  }
+
+  while (table2.rows.length != 0) {
+    table2.deleteRow(0);
+  }
 }
