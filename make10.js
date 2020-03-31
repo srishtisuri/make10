@@ -120,10 +120,10 @@ function addBrackets(equation, index1, index2, index3, index4) {
   equations.push(tempEquation.toString().replace(/,/g, ""));
 }
 
+//Evaluate solutions to equations and add them to respective table
 function evaluateSolutions() {
-  createTable("title1", `Successful Methods`, "rightTable");
-  createTable("title2", `Unsuccessful Methods`, "wrongTable");
-
+  createTable("rightTable");
+  createTable("wrongTable");
   equations.forEach(eq => {
     let ans = eval(eq);
     if (ans == 10) {
@@ -134,12 +134,16 @@ function evaluateSolutions() {
       fillTable("wrongTable", eq, ans);
     }
   });
+  document.getElementById(
+    "title1"
+  ).innerHTML = `Successful Methods: ${rightCount}`;
+  document.getElementById(
+    "title2"
+  ).innerHTML = `Unsuccessful Methods: ${wrongCount}`;
 }
 
-function createTable(titleId, heading, tableName) {
-  let h = document.getElementById(titleId);
-  h.innerHTML = heading;
-
+//Create both tables
+function createTable(tableName) {
   let table = document.getElementById(tableName);
   let tr = document.createElement("tr");
   table.appendChild(tr);
@@ -152,42 +156,34 @@ function createTable(titleId, heading, tableName) {
   tr.appendChild(th2);
 }
 
+//Add each equation to respective table as it is generated and solved
 function fillTable(id, eq, ans) {
   let table = document.getElementById(id);
-  let row = table.insertRow(table.rows.length);
+  let row = table.insertRow(-1);
   let cell1 = row.insertCell(0);
   let cell2 = row.insertCell(1);
   cell1.innerHTML = "" + eq;
   cell2.innerHTML = ans.toFixed(2);
 }
 
+//Main
 function compute() {
-  console.log(numbers.length);
-
   if (numbers.length == 0) {
     getNumbers();
   } else {
-    //let table1 = document.getElementById("rightTable");
-    // let table2 = document.getElementById("wrongTable");
     deleteTables();
-    // while (table1.rows.length > 0) {
-    //   console.log("kms");
-    // table1.deleteRow(0);
-    //   console.log("row deleted!");
-    // }
-    // while (table2.rows.length > 0) {
-    //   console.log(table2.rows.length);
-    //   table2.deleteRow(0);
-    //   console.log("row deleted!");
-    // }
 
-    //document.getElementById("rightTable").innerHTML = "";
-    //document.getElementById("wrongTable").innerHTML = "";
+    numbers = [];
+    numArrangements = [];
+    tempArray = [];
+    finalNumArrangements = [];
+    operationsArrangements = [];
+    equations = [];
+    rightCount = 0;
+    wrongCount = 0;
 
-    numbers.splice(0, 4);
     getNumbers();
   }
-
   arrangeNumbers();
   removeArraysWithDuplicates();
   arrangeOperations();
@@ -195,15 +191,14 @@ function compute() {
   evaluateSolutions();
 }
 
+//Delete tables when generating new results
 function deleteTables() {
   let table1 = document.getElementById("rightTable");
   let table2 = document.getElementById("wrongTable");
-
-  while (table1.rows.length != 0) {
-    table1.deleteRow(0);
+  while (table1.rows.length > 0) {
+    document.getElementById("rightTable").firstElementChild.remove();
   }
-
-  while (table2.rows.length != 0) {
-    table2.deleteRow(0);
+  while (table2.rows.length > 0) {
+    document.getElementById("wrongTable").firstElementChild.remove();
   }
 }
