@@ -15,10 +15,18 @@ function moveOnMax(field, nextFieldID) {
   }
 }
 
+//Input validatio
+
 //Retrieve numbers from input
 function getNumbers() {
   for (let i = 1; i < 5; i++) {
-    numbers.push(document.getElementById(`box${i}`).value);
+    if (!isNaN(document.getElementById(`box${i}`).value)) {
+      numbers.push(document.getElementById(`box${i}`).value);
+    } else {
+      alert("Please enter numbers only!");
+      window.location.reload();
+      console.log("hi");
+    }
   }
 }
 
