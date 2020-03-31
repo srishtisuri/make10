@@ -1,14 +1,17 @@
 //Global variables
 let numbers = [];
-
 let numArrangements = [];
 let tempArray = [];
 let finalNumArrangements = [];
 let operationsArrangements = [];
 let equations = [];
-
 let rightCount = 0;
 let wrongCount = 0;
+
+//Reload window
+function clear() {
+  window.location.reload();
+}
 
 //Move cursor for input boxes
 function moveOnMax(field, nextFieldID) {
