@@ -8,11 +8,6 @@ let equations = [];
 let rightCount = 0;
 let wrongCount = 0;
 
-//Reload window
-function clear() {
-  window.location.reload();
-}
-
 //Move cursor for input boxes
 function moveOnMax(field, nextFieldID) {
   if (field.value.length >= field.maxLength) {
