@@ -1,12 +1,12 @@
 //Global variables
-let numbers = [];
-let numArrangements = [];
-let tempArray = [];
-let finalNumArrangements = [];
-let operationsArrangements = [];
-let equations = [];
-let rightCount = 0;
-let wrongCount = 0;
+const numbers = [];
+const numArrangements = [];
+const tempArray = [];
+const finalNumArrangements = [];
+const operationsArrangements = [];
+const equations = [];
+const rightCount = 0;
+const wrongCount = 0;
 
 //Move cursor for input boxes
 function moveOnMax(field, nextFieldID) {
