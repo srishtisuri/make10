@@ -1,12 +1,12 @@
 //Global variables
-const numbers = [];
-const numArrangements = [];
-const tempArray = [];
-const finalNumArrangements = [];
-const operationsArrangements = [];
-const equations = [];
-const rightCount = 0;
-const wrongCount = 0;
+let numbers = [];
+let numArrangements = [];
+let tempArray = [];
+let finalNumArrangements = [];
+let operationsArrangements = [];
+let equations = [];
+let rightCount = 0;
+let wrongCount = 0;
 
 //Move cursor for input boxes
 function moveOnMax(field, nextFieldID) {
@@ -33,9 +33,9 @@ function getNumbers() {
 //All possible combinations of any 3 of the 4 maths operations
 function arrangeOperations() {
   let operations = ["+", "-", "/", "*"];
-  operations.forEach(o1 => {
-    operations.forEach(o2 => {
-      operations.forEach(o3 => {
+  operations.forEach((o1) => {
+    operations.forEach((o2) => {
+      operations.forEach((o3) => {
         operationsArrangements.push([o1, o2, o3]);
       });
     });
@@ -44,10 +44,10 @@ function arrangeOperations() {
 
 //All possible combinations of the 4 numbers
 function arrangeNumbers() {
-  numbers.forEach(n1 => {
-    numbers.forEach(n2 => {
-      numbers.forEach(n3 => {
-        numbers.forEach(n4 => {
+  numbers.forEach((n1) => {
+    numbers.forEach((n2) => {
+      numbers.forEach((n3) => {
+        numbers.forEach((n4) => {
           numArrangements.push([n1, n2, n3, n4]);
           tempArray.push([n1, n2, n3, n4]);
         });
@@ -59,7 +59,7 @@ function arrangeNumbers() {
 //Check duplicate combinations in final array e.g. numbers = [1,3,1,4] ~~> array1 = [1,1,3,4], array2 = [1,1,3,4]
 function checkIncludes(index) {
   let includes = false;
-  finalNumArrangements.forEach(arr => {
+  finalNumArrangements.forEach((arr) => {
     if (arr.toString() == numArrangements[index].toString()) {
       includes = true;
     }
@@ -130,7 +130,7 @@ function addBrackets(equation, index1, index2, index3, index4) {
 function evaluateSolutions() {
   createTable("rightTable");
   createTable("wrongTable");
-  equations.forEach(eq => {
+  equations.forEach((eq) => {
     let ans = eval(eq);
     if (ans == 10) {
       rightCount++;
